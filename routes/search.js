@@ -24,7 +24,6 @@ router.get('/', function(req, res, next) {
             resu[i].name = todo[i].get('name');
             resu[i].url = todo[i].get('url');
             resu[i].author = todo[i].get('author');
-            resu[i].latestChapter = todo[i].get('latestChapter');
             resu[i].plantFormId = todo[i].get('plantFormId');
             i++;
         }

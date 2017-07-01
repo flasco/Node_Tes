@@ -21,6 +21,7 @@
     "leancloud-realtime": "^3.4.1",
     "leancloud-storage": "^2.5.0",
     "leanengine": "^2.0.0",
+    "mysql": "^2.13.0",
     "querystring": "^0.2.0",
     "request": "^2.81.0",
     "xmldom": "^0.1.27",
