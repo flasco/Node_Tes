@@ -33,50 +33,19 @@ app.use(cookieParser());
 
 app.get('/', function(req, res) {
   res.render('index', { currentTime: new Date() });
-   console.log('action.....');
-  var queryx = new AV.Query('Novel');
-  // query.equalTo('plantFormId',2);
-    queryx.contains('name','武林');
-    queryx.find().then(function (todo) {
-      let i = 0;
-      while(i<todo.length){
-        console.log(todo[i].get('name')); // √
-        console.log(todo[i].get('author')); // √
-        console.log(todo[i].get('url')); // undefined
-        console.log('——————————————————————'); // undefined
-        i++;
-      }
-      
-    }, function (error) {
-      // 异常处理
-    })
-  // .then(function (todo) {
-  //   console.log(todo.get('name')); // √
-  //   console.log(todo.get('author')); // √
-  //   console.log(todo.get('url')); // undefined
-  // }, function (error) {
-  //   // 异常处理
-  // })
-  // console.log(queryx.toJSON());
-
-  // var cql = "select * from Novel where name = '武林%'";
-  // AV.Query.doCloudQuery(cql).then(function (data) {
-  //     // results 即为查询结果，它是一个 AV.Object 数组
-  //     var results = data.results;
-  //     for(let i=0;i<results.length;i++){
-  //       console.log(results[i].get('name')+'  '+i);
-  //     }
-      
-  // }, function (error) {
-  // });
-
-
-
 });
 
 
 // 可以将一类的路由单独保存在一个文件中
 app.use('/Analy_x',require('./routes/Analy_x'));
+app.use('/sear',require('./routes/search'));
+app.use('/start',require('./routes/StartTime'));
+// app.use('/refr',require('./routes/RefreshBook')); //屏蔽
+app.use('/rnklist',require('./routes/RankList'));
+
+app.get('/apidoc', function(req, res) {
+  res.render('api');
+});
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
