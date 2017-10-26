@@ -9,6 +9,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "1.12.3",
     "cheerio": "^1.0.0-rc.1",
     "connect-timeout": "^1.7.0",
@@ -16,14 +17,12 @@
     "ejs": "2.3.1",
     "express": "4.12.3",
     "iconv-lite": "^0.4.17",
-    "json": "^9.0.6",
     "leancloud-realtime": "^3.4.1",
     "leancloud-storage": "^2.5.0",
     "leanengine": "^2.0.0",
     "querystring": "^0.2.0",
     "request": "^2.81.0",
     "xmldom": "^0.1.27",
-    "xmlreader": "^0.2.3",
     "xpath.js": "^1.0.7"
   },
   "devDependencies": {
