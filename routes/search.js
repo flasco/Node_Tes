@@ -21,10 +21,12 @@ router.get('/', function(req, res, next) {
       if(todo.length>0){
         while(i<todo.length){
             resu[i] = new Object();
-            resu[i].name = todo[i].get('name');
+            resu[i].bookName = todo[i].get('name');
             resu[i].url = todo[i].get('url');
             resu[i].author = todo[i].get('author');
-            resu[i].plantFormId = todo[i].get('plantFormId');
+            resu[i].plantformId = todo[i].get('plantFormId');
+            resu[i].desc = todo[i].get('desc');
+            resu[i].img = todo[i].get('img');
             i++;
         }
       }else{

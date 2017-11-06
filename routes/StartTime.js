@@ -11,11 +11,11 @@ router.get('/', function (req, res, next) {
     if (param.h !== '') {
         if(Tm !== 1){
             Tm = 1;
-            startTime = new Date();
+            startTime = new Date().toLocaleTimeString();
             start(param.h * 60);
             res.end(`server will run ${ param.h } hour`);
         }else{
-            res.end(`server is already running at ${startTime}`);
+            res.end(`server run from ${startTime}`);
         }
         
     } else {
