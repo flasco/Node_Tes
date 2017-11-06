@@ -32,13 +32,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.get('/', function(req, res) {
-  res.render('index', { currentTime: new Date() });
+  res.render('index', { currentTime: new Date().toDateString() });
 });
 
 
 // 可以将一类的路由单独保存在一个文件中
 app.use('/Analy_x',require('./routes/Analy_x'));
 app.use('/sear',require('./routes/search'));
+app.use('/start',require('./routes/StartTime'));
+// app.use('/refr',require('./routes/RefreshBook')); //屏蔽
+app.use('/rnklist',require('./routes/RankList'));
+
+app.get('/apidoc', function(req, res) {
+  res.render('api');
+});
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
