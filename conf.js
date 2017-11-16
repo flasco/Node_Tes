@@ -1,51 +1,62 @@
-var fs = require('fs');
-var select = require('xpath.js');
-var Dom = require('xmldom').DOMParser;
+let sites = [{
+  title: '顶点文学',
+  charset: 'gbk',
+  url: 'http://www.x23us.com',
+  chapterListSelector: '#at td a',
+  chapterDetail: {
+    titleSelector: '#amain h1',
+    contentSelector: '#contents',
+    prevSelector: '#footlink a',
+    nextSelector: '#footlink a,2',
+  },
+  novelList: {
+    selector: '#content table tr',
+    nextSelector: '.next',
+    prevSelector: '.prev',
+  }
+}, {
+  title: '笔趣阁',
+  charset: 'UTF-8',
+  url: 'http://www.xs.la/',
+  chapterListSelector: '#list dd a',
+  chapterDetail: {
+    titleSelector: '.bookname h1',
+    contentSelector: '#content',
+    prevSelector: '#pager_prev',
+    nextSelector: '#pager_next',
+  },
+}, {
+  title: '看书中',
+  charset: 'gbk',
+  url: 'http://www.kanshuzhong.com/',
+  chapterListSelector: '.bookcontent dd a',
+  chapterDetail: {
+    titleSelector: '.ctitle',
+    contentSelector: '.textcontent',
+    prevSelector: '.readlink a',
+    nextSelector: '.readlink a,4',
+  },
+}, {
+  title: '起点',
+  charset: 'UTF-8',
+  url: 'http://read.qidian.com',
+  chapterListSelector: 'chapter-list-selector',
+  novelRankSelector: '.book-text tbody tr',
+}];
 
-function getXMLConf () {
-    let site_ = new Map();
-    let data = fs.readFileSync('./conf/Spider-Rule.xml', 'utf-8');
-    let doc = new Dom().parseFromString(data);
-    data = '';
-    let nodes = select(doc, 'site');
-    doc = '';
-    let j = 0;
-    while (j < nodes.length) {
-        let nodeChild = nodes[j].childNodes;
-        let bookSelector = new Map();
-        let i = 1;
-        while (i < nodeChild.length) {
-            bookSelector.set(nodeChild[i].nodeName, nodeChild[i].lastChild.data);
-            i += 2;
-        }
-        site_.set(j + 1, bookSelector);
-        j++;
+
+function getXMLConf() {
+
+  let site_ = {};
+  site_.getX = (host) => {
+    let index = ((host + '').indexOf('23us') > 0) && 0 || ((host + '').indexOf('xs.la') > 0) && 1 || ((host + '').indexOf('kanshuzhong') > 0) && 2 || ((host + '').indexOf('qidian') > 0) && 3 || -1;
+    if (index === -1) {
+      console.log('err');
+    } else {
+      return sites[index];
     }
-    // console.dir(site_);
-    site_.getX = (host, xmlselect) => {
-        let siteId = 0;
-        if ((host + '').indexOf('23us') > 0) {
-            siteId = 1;
-        } else if ((host + '').indexOf('qidian') > 0) {
-            siteId = 2;
-        } else if ((host + '').indexOf('xs.la') > 0) {
-            siteId = 3;
-        } else if ((host + '').indexOf('luoqiu') > 0) {
-            siteId = 4;
-        } else if ((host + '').indexOf('biqiuge.com') > 0) {
-            siteId = 5;
-        } else if ((host + '').indexOf('kanshuzhong') > 0) {
-            siteId = 6;
-        } else if ((host + '').indexOf('qu.la') > 0) {
-            siteId = 7;
-        }else if ((host + '').indexOf('xs.la') > 0) {
-            siteId = 8;
-        }
-        if (siteId === 0) { console.log('Error'); }
-
-        return site_.get(siteId).get(xmlselect);
-    };
-    return site_;
+  }
+  return site_;
 }
 
 module.exports = getXMLConf();
