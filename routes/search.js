@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
       let resu = [];
       if(todo.length>0){
         while(i<todo.length){
-            resu[i] = new Object();
+            resu[i] = {};
             resu[i].bookName = todo[i].get('name');
             resu[i].url = todo[i].get('url');
             resu[i].author = todo[i].get('author');
