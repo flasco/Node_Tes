@@ -1,9 +1,9 @@
-var cheerio = require('cheerio');
-var iconv = require('iconv-lite');
-var url = require('url');
-var axios = require('axios');
+const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
+const url = require('url');
+const axios = require('axios');
 
-var conf = require('./conf');
+const conf = require('./conf');
 
 async function crawlPage(urlx, callback) {
   const { err, data } = await axios.get(urlx, {
@@ -23,15 +23,12 @@ function NovelChaper(title, url) {
 }
 
 async function getChapterList(urlx, callback) {
-  let res = await crawlPage(urlx)
-  if (res === '-1') {
-    return '-1';
-  }
+  let res = await crawlPage(urlx);
+  if (res === '-1') { return '-1'; }
   const host = url.parse(urlx).host;
+  const cfg = conf.getX(host);
   res = iconv.decode(res, conf.getX(host).charset)
-  const $ = cheerio.load(res, {
-    decodeEntities: false
-  });
+  const $ = cheerio.load(res, { decodeEntities: false });
   let as = $(conf.getX(host).chapterListSelector);
   let arr = [], tit = new Set(), i = 0, j = 0;
   while (i < as.length) {
@@ -42,7 +39,7 @@ async function getChapterList(urlx, callback) {
     }
     i++;
   }
-  arr.sort(function (a, b) {
+  cfg.wheSort && arr.sort(function (a, b) {
     let o1U = a.url;
     let o2U = b.url;
     let o1Index = o1U.substring(o1U.lastIndexOf('/') + 1, o1U.lastIndexOf('.'));
@@ -58,23 +55,17 @@ async function getChapterDetail(urlx, callback) {
     return '-1';
   }
   const host = url.parse(urlx).host;
-  res = iconv.decode(res, conf.getX(host).charset);
+  const cfg = conf.getX(host);
+  res = iconv.decode(res, cfg.charset);
   res = res.replace(/&nbsp;/g, '').replace(/<br \/>/g, '${line}').replace(/<br\/>/g, '${line}');
   const $ = cheerio.load(res, { decodeEntities: false });
-  let asTit = $(conf.getX(host).chapterDetail.titleSelector);
-  let asCon = $(conf.getX(host).chapterDetail.contentSelector).text();
+  let asTit = $(cfg.chapterDetail.titleSelector);
+  let asCon = $(cfg.chapterDetail.contentSelector).text();
   let arr = {
     title: asTit[0].children[0].data,
     content: asCon.replace(/\${line}/g, '\n').replace(/[ 　]+/g, '').replace(/\n+/g, '\n')
   };
   return arr;
-}
-
-function bk(t, n, l, a) {
-  this.type = t;
-  this.name = n;
-  this.latestChapter = l;
-  this.author = a;
 }
 
 async function RnkList(x) {
@@ -84,27 +75,23 @@ async function RnkList(x) {
   if (res === '-1') {
     return '-1';
   }
-
   const host = url.parse(urlx).host;
-  res = iconv.decode(res, conf.getX(host).charset);
-  const $ = cheerio.load(res, {
-    decodeEntities: false
-  });
-  let ass = $(conf.getX(host).novelRankSelector);
+  const cfg = conf.getX(host);
+  res = iconv.decode(res, cfg.charset);
+  const $ = cheerio.load(res, { decodeEntities: false });
+  const ass = $(cfg.novelRankSelector);
   let $2, asn;
   for (let i = 0, size = ass.length; i < size; i++) {
-    $2 = cheerio.load(ass[i], {
-      decodeEntities: false
-    })
+    $2 = cheerio.load(ass[i], { decodeEntities: false })
     asn = $2('td');
     if (asn.length < 2) continue;
-    let type = asn[1].children[0].children[1].data;
-    let name = asn[2].children[0].children[0].data;
-    let latestChapter = asn[3].children[0].children[0].data;
-    let author = asn[5].children[0].children[0].data;
-    RankList.push(new bk(type, name, latestChapter, author));
+    RankList.push({
+      type: asn[1].children[0].children[1].data,
+      name: asn[2].children[0].children[0].data,
+      latestChapter: asn[3].children[0].children[0].data,
+      author: asn[5].children[0].children[0].data,
+    });
   }
-
   return RankList;
 }
 
