@@ -9,7 +9,7 @@ AV.Cloud.define('hello', function (request) {
 });
 
 AV.Cloud.define('serverStart', function (request) {
-  start(18 * 60);
+  start(17 * 60);
   return x.jiedian === 0 ? '华东节点 - flasco' : '华北节点 - testdb';
 });
 
