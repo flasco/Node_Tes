@@ -21,10 +21,11 @@ router.get('/', async function (req, res, next) {
   data = data.results;
   for (let i = 0, k = 0, j = data.length; i < j; i++) {
     let name = data[i].get('name');
-    if (nameSet[name] !== undefined) {
-      resu[nameSet[name]].source[data[i].get('plantFormId')] = data[i].get('url');
+    let author = data[i].get('author');
+    if (nameSet[`${name}${author}`] !== undefined) {
+        resu[nameSet[`${name}${author}`]].source[data[i].get('plantFormId')] = data[i].get('url');
     } else {
-      nameSet[name] = k;
+      nameSet[`${name}${author}`] = k;
       resu[k] = {
         bookName: name,
         author: data[i].get('author'),
