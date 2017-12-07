@@ -2,9 +2,9 @@
 var AV = require('leanengine');
 
 AV.init({
-  appId: 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',//process.env.LEANCLOUD_APP_ID,
-  appKey: 'hF492dpV15UMdQt120SE966S',//process.env.LEANCLOUD_APP_KEY,
-  masterKey: 'E4zmhkfMxtVIywSB4qnhkq1C'//process.env.LEANCLOUD_APP_MASTER_KEY
+  appId: 'M22eETXJpSet2dM6zlOjCYWG-9Nh9j0Va',//process.env.LEANCLOUD_APP_ID,
+  appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',//process.env.LEANCLOUD_APP_KEY,
+  masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'//process.env.LEANCLOUD_APP_MASTER_KEY
 });
 
 // var Novel = AV.Object.extend('Novel');
