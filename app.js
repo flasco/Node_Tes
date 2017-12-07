@@ -55,8 +55,6 @@ app.use(function (req, res, next) {
   }
 });
 
-
-
 // error handlers
 app.use(function (err, req, res, next) {
   if (req.timedout && req.headers.upgrade === 'websocket') {
