@@ -50,7 +50,6 @@ let sites = [{
 
 
 function getXMLConf() {
-
   let site_ = {};
   site_.getX = (host) => {
     let index = ((host + '').indexOf('23us') > 0) && 0
