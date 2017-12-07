@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
 // 可以将一类的路由单独保存在一个文件中
 app.use('/Analy_x', require('./routes/Analy_x'));
 app.use('/sear', require('./routes/search'));
-app.use('/start', require('./routes/StartTime'));
+// app.use('/start', require('./routes/StartTime'));
 app.use('/rnklist', require('./routes/RankList'));
 
 app.get('/apidoc', function (req, res) {

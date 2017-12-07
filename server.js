@@ -1,11 +1,16 @@
 'use strict';
 var AV = require('leanengine');
-
-AV.init({
-  appId: 'M22eETXJpSet2dM6zlOjCYWG-9Nh9j0Va',//process.env.LEANCLOUD_APP_ID,
-  appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',//process.env.LEANCLOUD_APP_KEY,
-  masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'//process.env.LEANCLOUD_APP_MASTER_KEY
-});
+var x = require('./config');
+let appArray = [{
+  appId: 'M22eETXJpSet2dM6zlOjCYWG-9Nh9j0Va',
+  appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',
+  masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'
+},{
+  appId: 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',
+  appKey: 'hF492dpV15UMdQt120SE966S',
+  masterKey: 'E4zmhkfMxtVIywSB4qnhkq1C'
+}]
+AV.init(appArray[x.jiedian]); //1  是 华北节点  0 是 华东节点
 
 // var Novel = AV.Object.extend('Novel');
 
