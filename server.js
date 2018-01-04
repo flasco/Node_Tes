@@ -6,9 +6,9 @@ let appArray = [{
   appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',
   masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'
 },{
-  appId: '9vtdUGR2GKJl5QsEWNFtvaFX-9Nh9j0Va',
-  appKey: 'CK7x191gHVt1agmbxsbzt4Da',
-  masterKey: '7KO61v6Hto9QarNl3xkdJUed'
+  appId: 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',
+  appKey: 'hF492dpV15UMdQt120SE966S',
+  masterKey: 'E4zmhkfMxtVIywSB4qnhkq1C'
 }]
 AV.init(appArray[x.jiedian]); //1  是 华北节点  0 是 华东节点
 
