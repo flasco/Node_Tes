@@ -1,9 +1,9 @@
 'use strict';
 var AV = require('leanengine');
 AV.init({
-  appId: 'M22eETXJpSet2dM6zlOjCYWG-9Nh9j0Va',
-  appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',
-  masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'
+  appId: '9vtdUGR2GKJl5QsEWNFtvaFX-9Nh9j0Va',
+  appKey: 'CK7x191gHVt1agmbxsbzt4Da',
+  masterKey: '7KO61v6Hto9QarNl3xkdJUed'
 });
 // 如果不希望使用 masterKey 权限，可以将下面一行删除
 AV.Cloud.useMasterKey();
