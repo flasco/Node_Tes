@@ -1,6 +1,5 @@
 var AV = require('leanengine');
 var httpReq = require('./HttpReq');
-var x = require('./config');
 /**
  * 一个简单的云代码方法
  */
@@ -10,12 +9,11 @@ AV.Cloud.define('hello', function (request) {
 
 AV.Cloud.define('serverStart', function (request) {
   start(17 * 60);
-  return x.jiedian === 0 ? '华东节点 - flasco' : '华北节点 - testdb';
 });
 
 function start(tim) {
   console.log(`服务器将持续运行- ${tim} minutes`);
-  httpReq.crawlPage(`http://${x.jiedian === 0 ? 'flasco' : 'testdb'}.leanapp.cn/`, () => { });
+  httpReq.crawlPage(`http://testdb.leanapp.cn/`, () => { });
   tim -= 20;
   if (tim > 0) {
     setTimeout(function () {
