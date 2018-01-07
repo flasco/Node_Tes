@@ -13,7 +13,7 @@ AV.Cloud.define('serverStart', function (request) {
 
 function start(tim) {
   console.log(`服务器将持续运行- ${tim} minutes`);
-  httpReq.crawlPage(`http://${x.jiedian === 0 ? 'flasco' : 'testdb'}.leanapp.cn/`, () => { });
+  httpReq.crawlPage(`http://flasco.leanapp.cn/`, () => { });
   tim -= 20;
   if (tim > 0) {
     setTimeout(function () {
