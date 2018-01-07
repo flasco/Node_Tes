@@ -1,19 +1,10 @@
 'use strict';
 var AV = require('leanengine');
-var x = require('./config');
-let appArray = [{
-  appId: 'M22eETXJpSet2dM6zlOjCYWG-9Nh9j0Va',
-  appKey: 'gWvgqlEGV9QRiN77AJsmRuYR',
-  masterKey: 'GWHDRpDtK5KJBhzEEObaHHen'
-},{
+AV.init({
   appId: 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',
   appKey: 'hF492dpV15UMdQt120SE966S',
   masterKey: 'E4zmhkfMxtVIywSB4qnhkq1C'
-}]
-AV.init(appArray[x.jiedian]); //1  是 华北节点  0 是 华东节点
-
-// var Novel = AV.Object.extend('Novel');
-
+});
 // 如果不希望使用 masterKey 权限，可以将下面一行删除
 AV.Cloud.useMasterKey();
 

@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const conf = require('./conf');
 
-async function crawlPage(urlx, callback) {
+async function crawlPage(urlx) {
   const { err, data } = await axios.get(urlx, {
     responseType: 'arraybuffer',//不对抓取的数据进行编码解析
     headers: {
@@ -22,7 +22,7 @@ function NovelChaper(title, url) {
   this.url = url.replace(/(.*)(\/.*\/){2}(.*)/, '$1$2$3');
 }
 
-async function getChapterList(urlx, callback) {
+async function getChapterList(urlx) {
   let res = await crawlPage(urlx);
   if (res === '-1') { return '-1'; }
   const host = url.parse(urlx).host;
@@ -49,7 +49,18 @@ async function getChapterList(urlx, callback) {
   return arr;
 }
 
-async function getChapterDetail(urlx, callback) {
+async function getLatestChapter(urlx){
+  let res = await crawlPage(urlx);
+  if (res === '-1') { return '-1'; }
+  const host = url.parse(urlx).host;
+  const cfg = conf.getX(host);
+  res = iconv.decode(res, conf.getX(host).charset)
+  const $ = cheerio.load(res, { decodeEntities: false });
+  let as = $(conf.getX(host).latestChapterSelector);
+  return as.attr(conf.getX(host).latestChapterInfo);
+}
+
+async function getChapterDetail(urlx) {
   let res = await crawlPage(urlx);
   if (res === '-1') {
     return '-1';
@@ -101,3 +112,4 @@ exports.getChapterList = getChapterList;
 exports.crawlPage = crawlPage;
 exports.getChapterDetail = getChapterDetail;
 exports.RnkList = RnkList;
+exports.getLatestChapter = getLatestChapter;

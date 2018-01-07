@@ -2,7 +2,9 @@ let sites = [{
   title: '顶点文学',
   wheSort: false,
   charset: 'gbk',
+  latestChapterInfo:'content',
   url: 'http://www.x23us.com',
+  latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '#at td a',
   chapterDetail: {
     titleSelector: '#amain h1',
@@ -19,7 +21,9 @@ let sites = [{
   title: '笔趣阁',
   wheSort: false,
   charset: 'UTF-8',
+  latestChapterInfo:'content',
   url: 'http://www.xs.la/',
+  latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '#list dd a',
   chapterDetail: {
     titleSelector: '.bookname h1',
@@ -32,6 +36,8 @@ let sites = [{
   wheSort: false,
   charset: 'gbk',
   url: 'http://www.kanshuzhong.com/',
+  latestChapterInfo:'content',
+  latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '.bookcontent dd a',
   chapterDetail: {
     titleSelector: '.ctitle',
@@ -44,6 +50,8 @@ let sites = [{
   wheSort: false,
   charset: 'UTF-8',
   url: 'http://read.qidian.com',
+  latestChapterSelector: `.update .detail .cf a`,
+  latestChapterInfo:'title',
   chapterListSelector: '.volume-wrap .volume li a',
   novelRankSelector: '.book-text tbody tr'
 }];
