@@ -1,9 +1,9 @@
 'use strict';
 var AV = require('leanengine');
 AV.init({
-  appId: 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',
-  appKey: 'hF492dpV15UMdQt120SE966S',
-  masterKey: 'E4zmhkfMxtVIywSB4qnhkq1C'
+  appId: process.env.LEANCLOUD_APP_ID || 'XvM4C5TKB8AK1XcyC3041OeQ-gzGzoHsz',
+  appKey: process.env.LEANCLOUD_APP_KEY || 'hF492dpV15UMdQt120SE966S',
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'E4zmhkfMxtVIywSB4qnhkq1C'
 });
 // 如果不希望使用 masterKey 权限，可以将下面一行删除
 AV.Cloud.useMasterKey();
@@ -18,10 +18,10 @@ app.listen(PORT, function (err) {
   console.log('Node app is running on port:', PORT);
 
   // 注册全局未捕获异常处理器
-  process.on('uncaughtException', function(err) {
+  process.on('uncaughtException', function (err) {
     console.error("Caught exception:", err.stack);
   });
-  process.on('unhandledRejection', function(reason, p) {
+  process.on('unhandledRejection', function (reason, p) {
     console.error("Unhandled Rejection at: Promise ", p, " reason: ", reason.stack);
   });
 });
