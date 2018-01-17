@@ -4,21 +4,19 @@ var querystring = require('querystring');
 
 var AV = require('leanengine');
 
+var query = new AV.SearchQuery('Novel');
+
 router.get('/', async function (req, res, next) {
-  let word = req.query.name, author = req.query.aut, pid = req.query.pid;
+  let word = req.query.name;
   if (word.length === 0) {
     res.writeHead(200, { 'Content-Type': 'text/html;charset=UTF-8' });
     res.end('Empty word..');
     return;
   }
-  let resu = [], nameSet = [],cql;
-  if (pid === undefined || pid.length === 0) {
-    cql = `select * from Novel where name like '%${word}%' and author like '%${author}%' limit 120 order by plantFormId`;
-  } else {
-    cql = `select * from Novel where name like '%${word}%' and author like '%${author}%' and plantFormId = ${pid} limit 120 order by plantFormId`;
-  }
-  let data = await AV.Query.doCloudQuery(cql);
-  data = data.results;
+  let resu = [], nameSet = [];
+  query.queryString(word);
+  let data = await query.find();
+  
   for (let i = 0, k = 0, j = data.length; i < j; i++) {
     let name = data[i].get('name');
     let author = data[i].get('author');
