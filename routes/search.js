@@ -4,7 +4,7 @@ var querystring = require('querystring');
 
 var AV = require('leanengine');
 
-var query = new AV.SearchQuery('Novel');
+
 
 router.get('/', async function (req, res, next) {
   let word = req.query.name;
@@ -14,6 +14,7 @@ router.get('/', async function (req, res, next) {
     return;
   }
   let resu = [], nameSet = [];
+  const query = new AV.SearchQuery('Novel');
   query.queryString(word);
   let data = await query.find();
   
