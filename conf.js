@@ -2,7 +2,7 @@ let sites = [{
   title: '顶点文学',
   wheSort: false,
   charset: 'gbk',
-  latestChapterInfo:'content',
+  latestChapterInfo: 'content',
   url: 'http://www.x23us.com',
   latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '#at td a',
@@ -21,7 +21,7 @@ let sites = [{
   title: '笔趣阁',
   wheSort: false,
   charset: 'UTF-8',
-  latestChapterInfo:'content',
+  latestChapterInfo: 'content',
   url: 'http://www.xs.la/',
   latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '#list dd a',
@@ -36,7 +36,7 @@ let sites = [{
   wheSort: false,
   charset: 'gbk',
   url: 'http://www.kanshuzhong.com/',
-  latestChapterInfo:'content',
+  latestChapterInfo: 'content',
   latestChapterSelector: `meta[property='og:novel:latest_chapter_name']`,
   chapterListSelector: '.bookcontent dd a',
   chapterDetail: {
@@ -51,9 +51,21 @@ let sites = [{
   charset: 'UTF-8',
   url: 'http://read.qidian.com',
   latestChapterSelector: `.update .detail .cf a`,
-  latestChapterInfo:'title',
+  latestChapterInfo: 'title',
   chapterListSelector: '.volume-wrap .volume li a',
   novelRankSelector: '.book-text tbody tr'
+}, {
+  title: '笔趣',
+  wheSort: false,
+  charset: 'gbk',
+  url: 'http://www.biqu.cm/',
+  chapterListSelector: '#list dd a',
+  chapterDetail: {
+    titleSelector: '.bookname h1',
+    contentSelector: '#content',
+    prevSelector: '#pager_prev',
+    nextSelector: '#pager_next',
+  },
 }];
 
 
@@ -64,6 +76,7 @@ function getXMLConf() {
       || ((host + '').indexOf('xs.la') > 0) && 1
       || ((host + '').indexOf('kanshuzhong') > 0) && 2
       || ((host + '').indexOf('qidian') > 0) && 3
+      || ((host + '').indexOf('biqu.cm') > 0) && 4
       || -1;
     if (index === -1) {
       console.log('err');
